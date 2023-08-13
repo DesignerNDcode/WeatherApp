@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather Widget</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<style>
+</style>
+</head>
+<body>
+
+  <div class="btns_div">
+    <h3 class="title" style="color: white;">Suggestions: </h3>
+    <form method="post" action="">
+      {% csrf_token %}
+      <input class="custom-input" name="city" type="hidden" value="Hyderabad" id="cityInput" placeholder=" " required autocomplete="off">
+    
+      <button type="submit" class="sug-button">Hyderabad</button>
+     </form>
+    
+     <form method="post" action="">
+      {% csrf_token %}
+     
+      <input class="custom-input" name="city" type="hidden" value="London" id="cityInput" placeholder=" " required autocomplete="off">
+    
+      <button type="submit" class="sug-button">London</button>
+     </form>
+    
+     <form method="post" action="">
+      {% csrf_token %}
+      <input class="custom-input" name="city" type="hidden" value="Berlin" id="cityInput" placeholder=" " required autocomplete="off">
+     
+      <button type="submit" class="sug-button">Berlin</button>
+     </form>
+    
+  </div>
+
+ <main>
+
+  <div class="custom-form">
+   <form method="post" action="">
+    {% csrf_token %}
+    <input class="custom-input" name="city" type="text" id="cityInput" placeholder=" " required autocomplete="off">
+    <span class="custom-placeholder" data-placeholder="City Name"></span>
+    <button type="submit" class="location-button">Check</button>
+   </form>
+   
+  </div>
+  
+  
+<div class="container">
+  <div class="weather-side">
+    <div class="weather-gradient"></div>
+    <div class="date-container">
+      <h2 class="date-dayname">{{curr.Day}}</h2><span class="date-day">{{today}}</span><i class="location-icon" data-feather="map-pin"></i><span class="location">{{curr.location}}</span>
+    </div>
+    <div class="weather-container">
+      <img class="weather-icon" src="{{curr.icon}}">
+      <h1 class="weather-temp">{{curr.temperature}}°C</h1>
+      <h3 class="weather-desc">{{curr.condition}}</h3>
+    </div>
+  </div>
+  <div class="info-side">
+    <div class="today-info-container">
+      <div class="today-info">
+        <div class="precipitation"> <span class="title">PRECIPITATION</span><span class="value">{{curr.precip_mm}}mm</span>
+          <div class="clear"></div>
+        </div>
+        <div class="humidity"> <span class="title">HUMIDITY</span><span class="value">{{curr.humidity}}%</span>
+          <div class="clear"></div>
+        </div>
+        <div class="wind"> <span class="title">WIND</span><span class="value">{{curr.wind_kph}}km/h</span>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+    <div class="week-container">
+      <ul class="week-list">
+        {% for i in forecast.items %}
+        
+        <li  {% if forloop.counter == 1 %} class="active" {% endif %}>      <img class="weather-icon" src="{{i.1.icon}}"><span class="day-name">{{ i.1.day }}
+        </span><span class="day-temp">{{i.1.centi_gr}}°C</span></li>
+        {% endfor %}
+
+        <div class="clear"></div>
+      </ul>
+    </div>
+    <div class="location-container">
+      <button class="location-button"> <i data-feather="map-pin"></i><span>Change location</span></button>
+    </div>
+  </div>
+</div>
+
+ </main>
+ 
+
+<script src="https://unpkg.com/feather-icons@4.28.0"></script>
+<script>
+  feather.replace();
+ const cities = [
+  "Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa",
+  "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide",
+  "New York City", "Los Angeles", "Chicago", "Houston", "Miami",
+  "Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras Al Khaimah",
+  "Karachi", "Lahore", "Islamabad", "Faisalabad", "Rawalpindi",
+  "Mumbai", "New Delhi", "Bangalore", "Chennai", "Kolkata",
+  "Riyadh", "Jeddah", "Mecca", "Medina", "Dammam",
+  "Helsinki", "Tampere", "Turku", "Oulu", "Espoo",
+  "Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg", "Kazan"
+];
+
+const btnsDiv = document.querySelector('.btns_div');
+const cityInput = document.getElementById('cityInput');
+
+let currentIndex = 0;
+
+function updateSuggestions() {
+  const suggestedCities = cities.slice(currentIndex, currentIndex + 3);
+
+  const suggestionsHtml = suggestedCities.map(city => `
+    <form method="post" action="">
+      {% csrf_token %}
+      <input class="custom-input" name="city" type="hidden" value="${city}" id="cityInput" placeholder=" " required autocomplete="off">
+      <button type="submit" class="sug-button">${city}</button>
+    </form>
+  `).join('');
+
+  btnsDiv.innerHTML = `
+    <h3 class="title" style="color: white;">Suggestions: </h3>
+    ${suggestionsHtml}
+  `;
+
+  btnsDiv.style.opacity = '0'; // Start with opacity 0
+
+  // Apply fade-in animation
+  setTimeout(() => {
+    btnsDiv.style.opacity = '1';
+    btnsDiv.style.transition = 'opacity 1s ease-in-out';
+  }, 10); // Delay for smoother transition
+
+  currentIndex = (currentIndex + 3) % cities.length;
+}
+
+updateSuggestions();
+setInterval(updateSuggestions, 8000);
+
+
+
+</script>
+</body>
+</html>

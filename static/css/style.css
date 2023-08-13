@@ -1,0 +1,430 @@
+/* Styling for the main container */
+main {
+  padding: 0 85px;
+}
+body{
+  padding: 25px;
+}
+
+
+
+/* Styling for the custom form */
+.custom-form {
+  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  width: 100%;
+  margin: 31px 0;
+}
+
+/* Styling for text input fields */
+.custom-input {
+  border: none;
+  border-bottom: 2px solid #3db9c6;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  color: white;
+  background-color: transparent;
+  transition: border-bottom-color 0.3s;
+}
+
+/* Styling for focused text input fields */
+.custom-input:focus {
+  outline: none;
+  border-bottom-color: #ff5a5f;
+}
+
+/* Styling for custom placeholders */
+.custom-placeholder::before {
+  content: attr(data-placeholder);
+  position: relative;
+  top: -30px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 12px;
+  color: #888;
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+}
+
+/* Styling for focused input fields and non-empty input */
+.custom-input:focus+.custom-placeholder::before,
+.custom-input:not(:placeholder-shown)+.custom-placeholder::before {
+  top: -55px;
+  font-size: 10px;
+  color: #3db9c6;
+}
+
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap');
+
+/* Root variable for gradient background */
+:root {
+  --gradient: linear-gradient(135deg, #72EDF2 10%, #5151E5 100%);
+}
+
+/* Global styles and resets */
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 1.25em;
+}
+
+.clear {
+  clear: both;
+}
+
+/* Styling for the body */
+body {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #343d4b;
+  display: block;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styling for the main container */
+.container {
+  border-radius: 25px;
+  box-shadow: 0 0 70px -10px rgba(0, 0, 0, 0.2);
+  background-color: #222831;
+  color: #ffffff;
+  height: 505px;
+  display: flex;
+}
+
+/* Styling for the weather side */
+.weather-side {
+  position: relative;
+  height: 100%;
+  border-radius: 25px;
+  background-image: url("https://images.unsplash.com/photo-1559963110-71b394e7494d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80");
+  width: 300px;
+  box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
+  transition: transform 300ms ease;
+  transform: translateZ(0) scale(1.02) perspective(1000px);
+  float: left;
+}
+
+/* Styling for hover effect on weather side */
+.weather-side:hover {
+  transform: scale(1.1) perspective(1500px) rotateY(10deg);
+}
+
+/* Styling for the weather gradient overlay */
+.weather-gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: var(--gradient);
+  border-radius: 25px;
+  opacity: 0.8;
+}
+
+/* Styling for the date container */
+.date-container {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+}
+
+/* Styling for day name in date */
+.date-dayname {
+  margin: 0;
+}
+
+/* Styling for day number in date */
+.date-day {
+  display: block;
+}
+
+/* Styling for location information */
+.location {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* Styling for location icon */
+.location-icon {
+  display: inline-block;
+  height: 0.8em;
+  width: auto;
+  margin-right: 5px;
+}
+
+/* Styling for weather information container */
+.weather-container {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+}
+
+/* Styling for weather icons */
+.weather-icon.feather {
+  height: 60px;
+  width: auto;
+}
+
+/* Styling for weather temperature */
+.weather-temp {
+  margin: 0;
+  font-weight: 700;
+  font-size: 4em;
+}
+
+/* Styling for weather description */
+.weather-desc {
+  margin: 0;
+}
+
+/* Styling for the info side */
+.info-side {
+  position: relative;
+  float: left;
+  height: 100%;
+  padding-top: 25px;
+}
+
+/* Styling for today's information */
+.today-info {
+  padding: 15px;
+  margin: 0 25px 25px 25px;
+  border-radius: 10px;
+}
+
+/* Styling for individual info elements */
+.today-info>div:not(:last-child) {
+  margin: 0 0 10px 0;
+}
+
+.today-info>div .title {
+  float: left;
+  font-weight: 700;
+}
+
+.today-info>div .value {
+  float: right;
+}
+
+/* Styling for the week list */
+.week-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 35px;
+  box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+/* Styling for individual days in the week list */
+.week-list>li {
+  float: left;
+  padding: 15px;
+  cursor: pointer;
+  transition: 200ms ease;
+  border-radius: 10px;
+}
+
+/* Styling for hover effect on week list items */
+.week-list>li:hover {
+  transform: scale(1.1);
+  background: #fff;
+  color: #222831;
+  box-shadow: 0 0 40px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for active day in the week list */
+.week-list>li.active {
+  background: #fff;
+  color: #222831;
+  border-radius: 10px;
+}
+
+/* Styling for day name in week list */
+.week-list>li .day-name {
+  display: block;
+  margin: 10px 0 0 0;
+  text-align: center;
+}
+
+/* Styling for day icon in week list */
+.week-list>li .day-icon {
+  display: block;
+  height: 30px;
+  width: auto;
+  margin: 0 auto;
+}
+
+/* Styling for day temperature in week list */
+.week-list>li .day-temp {
+  display: block;
+  text-align: center;
+  margin: 10px 0 0 0;
+  font-weight: 700;
+}
+
+/* Styling for the location container */
+.location-container {
+  padding: 25px 35px;
+}
+
+/* Styling for the location button */
+.location-button {
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  font-family: 'Montserrat', sans-serif;
+  background-image: var(--gradient);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 200ms ease;
+}
+
+/* Styling for hover effect on location button */
+.location-button:hover {
+  transform: scale(0.95);
+}
+
+/* Styling for location button icon */
+.location-button .feather {
+  height: 1em;
+  width: auto;
+  margin-right: 5px;
+}
+
+/* buttons div start ---------*/
+.btns_div {
+  display: flex !important;
+  margin: 35px;
+}
+
+.sug-button {
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  font-family: 'Montserrat', sans-serif;
+  background-image: white;
+  padding: 15px 65px;
+  color: #000000;
+  font-weight: 800;
+  box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 200ms ease;
+  margin: 5px 5px;
+
+
+}
+
+
+.sug-button:hover {
+  transform: scale(.95);
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* buttons div end */
+
+
+/* Original CSS rules */
+
+/* ... (all the original CSS rules) ... */
+
+/* Media Query for Tablets and Larger Screens */
+@media (max-width: 768px) {
+  .btns_div {
+    display: block !important;
+    margin: 35px;
+  }
+
+  body {
+    display: block;
+  }
+
+  main {
+    padding: 25px 50px;
+  }
+
+  .container {
+    height: 741px;
+    min-width: 555px;
+  }
+
+  .weather-side {
+    width: 350px;
+  }
+
+  .today-info {
+    margin: 0 40px 25px 40px;
+  }
+
+  .week-list {
+    margin: 10px 60px;
+  }
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 576px) {
+  body {
+    display: block;
+  }
+
+  main {
+    padding: 15px 30px;
+  }
+
+  .container {
+    display: block;
+    min-width: 0;
+  }
+
+  .weather-side {
+    width: 100%;
+    margin: 15px 0;
+    float: none;
+  }
+
+  .info-side {
+    float: none;
+    padding-top: 0;
+  }
+
+  .location-button {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .btns_div {
+    flex-direction: column;
+    margin: 20px;
+  }
+
+  .sug-button {
+    padding: 8px 15px;
+    font-size: 14px;
+    margin: 5px 0;
+  }
+
+  .sug-button:nth-child(n) {
+    animation: none;
+  }
+}
